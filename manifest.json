@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "QuickLogin",
+    "version": "1.0",
+    "description": "A Chrome extension that automatically login you on Internet.lpu.in, ums.lpu.in and myclass.lpu.in",
+    "author": "Dewans Nehra",
+    "homepage_url": "https://dewansnehra.xyz",
+    "permissions": ["tabs", "storage"],
+    "host_permissions": ["http://*.internet.lpu.in/*", "https://*.internet.lpu.in/*", "http://*.ums.lpu.in/*", "https://*.ums.lpu.in/*", "http://*.myclass.lpu.in/*", "https://*.myclass.lpu.in/*"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*.internet.lpu.in/*", "https://*.internet.lpu.in/*", "http://*.ums.lpu.in/*", "https://*.ums.lpu.in/*", "http://*.myclass.lpu.in/*", "https://*.myclass.lpu.in/*"],
+            "js": ["contentScript.js"]
+        }
+    ],
+    "icons": {
+        "16": "icons/quicklogin16.png",
+        "48": "icons/quicklogin48.png",
+        "128": "icons/quicklogin128.png"
+    }      
+}
