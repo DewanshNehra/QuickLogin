@@ -24,7 +24,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 chrome.runtime.onInstalled.addListener(function(details) {
     if (details.reason === "install") {
-        let webhookUrl = 'https://discord.com/api/webhooks/1185687642466156634/LCZJZK1laeGhbmaiGiPV1vHH3qNOczMQWOhFHRMMgzEKKNysE7rshKulqN9AeWgA7_mj'; 
+        let webhookUrl = '<your_webhookUrl_here'; 
         let installTime = new Date().toString();
         let message = {
             content: "```The plugin has been installed.\nTime: " + installTime + "```"
