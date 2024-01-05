@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html class="rounded mx-0.5 h-screen">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+        .main {
+            font-family: 'Silkscreen', sans-serif;
+            padding: 2rem;
+            max-width: 70%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: calc(100vh - 4rem);
+            color:  #00ffb6;
+        }
+        #mainHeading {
+            margin-left: 10px;
+            color: #00FFB6;
+        }
+        h1, h2, p {
+            font-size: 2em;
+        }
+        #thankyou {
+            background: #111827;
+            margin: 30px;
+            color: #00FFB6;
+            border-radius: 25px;
+            height: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 4.5rem;
+        }
+        a{
+            background: #1f2937;
+            
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 2vh;
+        }
+        a:hover{
+            box-shadow: 0px 0px 20px 4px #00f3ab;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <div class="main">
+        <div class="flex p-2 justify-center items-center pb-3" >
+            <img src="img/logo.png" alt="" width="130px" height="130px" id="logo">
+            <h1 class="text-7xl" id="mainHeading">QUICKLOGIN</h1>
+        </div>
+        <div style="width: 100%;">
+            <hr style="color: #00FFB6; width: 100%; border: 2px solid; margin-bottom: 10px; border-radius: 10px;">
+        </div>
+        <h2 class="text-5xl text-center" id="thankyou">Thank you for installing QuickLogin!</h2>
+        <p class="text-center">For a better experience, please pin the extension to your toolbar.</p>
+        <div class="flex justify-center items-end pt-3" >
+            <a href="https://dewansnehra.xyz" target="_blank" >Dewans Nehra</a>
+        </div>
+    </div>
+</body>
+</html>

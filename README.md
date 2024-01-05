@@ -1,6 +1,6 @@
 # QuickLogin
 
-![QuickLogin](./Frame1.png)
+![QuickLogin](img/v1.1.png)
 
 ## Description
 

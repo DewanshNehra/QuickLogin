@@ -81,28 +81,19 @@ document.getElementById('save').addEventListener('click', () => {
     });
 });
 
-function updateListItems(users, activeUser) {
+function updateListItems(users) {
     let userList = document.getElementById('userList');
     userList.innerHTML = '';
     users.forEach(function(user, index) {
         let li = document.createElement('li');
         li.textContent = user.username + ': ' ;
-        li.className = (user.username === activeUser.username && user.password === activeUser.password) ? 'bg-green-400 p-2 py-3 text-black' : 'bg-gray-900 p-3';
-        let toggleButton = document.createElement('button');
-        toggleButton.textContent = 'Toggle';
-        toggleButton.className = (user.username === activeUser.username && user.password === activeUser.password) ?'ml-2 p-1 bg-black text-white cursor-pointer hover:bg-white hover:text-black rounded' : 'ml-2 p-1 bg-green-400 text-gray-900 cursor-pointer hover:bg-green-300 rounded';
-        toggleButton.addEventListener('click', function() {
-            chrome.storage.local.set({activeUser: user}, function() {
-                if (chrome.runtime.lastError) {
-                    console.log(`Error setting active user in local storage: ${chrome.runtime.lastError.message}`);
-                } else {
-                    console.log("Active user set in local storage");
-                    updateListItems(users, user);
-                }
-            });
-        });
+        li.className = (user.username  && user.password ) ? 'bg-gray-900 p-2 py-3 mb-1' :   'bg-green-400 p-2 py-3 mb-1 text-black'  ;
+        // li.className = (user.username  && user.password ) ? 'bg-green-400 p-2 py-3 mb-1 text-black':'bg-gray-900 p-2 py-3 mb-1';
         let deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
+        deleteButton.innerHTML = `<div class="tooltip">
+        <img src="icons/trash.svg" width="20px" height="20px"></img>
+        <span class="tooltiptext">Delete</span>
+        </div> `;
         deleteButton.className = 'ml-2 p-1 bg-red-500 text-white cursor-pointer hover:bg-red-400 rounded';
         deleteButton.addEventListener('click', function() {
             users.splice(index, 1);
@@ -111,23 +102,89 @@ function updateListItems(users, activeUser) {
                     console.log(`Error deleting user from local storage: ${chrome.runtime.lastError.message}`);
                 } else {
                     console.log("User deleted from local storage");
-                    updateListItems(users, activeUser);
+                    updateListItems(users);
                 }
             });
         });
-        li.appendChild(toggleButton);
+        //Create the new button
+        let umsButton = document.createElement('button');
+        umsButton.innerHTML = `<div class="tooltip">
+            <img src="icons/ums.svg" width="20px" height="20px"></img>
+            <span class="tooltiptext">UMS Login</span>
+            </div>`;
+        umsButton.className = user.enabledForUms ? 'ml-2 p-1 bg-green-500 text-white cursor-pointer hover:bg-green-400 rounded' : 'ml-2 p-1 bg-gray-800 text-white cursor-pointer hover:bg-green-400 rounded';
+        umsButton.addEventListener('click', function() {
+            // Toggle the 'enabledForUms' property and update the user list in local storage
+            user.enabledForUms = !user.enabledForUms;
+            umsButton.textContent = user.enabledForUms ? 'U' : 'U';
+            umsButton.className = user.enabledForUms ? 'ml-2 p-1 bg-green-500 text-white cursor-pointer hover:bg-green-400 rounded' : 'ml-2 p-1 bg-gray-800 text-white cursor-pointer hover:bg-green-400 rounded';
+            chrome.storage.local.set({users: users}, function() {
+                if (chrome.runtime.lastError) {
+                    console.log(`Error updating user in local storage: ${chrome.runtime.lastError.message}`);
+                } else {
+                    console.log("User updated in local storage");
+                    updateListItems(users); // Update the list to reflect the changes
+                }
+            });
+        });
+        // Create the MyClass button
+        let myclassButton = document.createElement('button');
+        myclassButton.innerHTML = `<div class="tooltip">
+            <img src="icons/myclass.svg" width="20px" height="20px"></img>
+            <span class="tooltiptext">MyClass Login</span>
+            </div>`;
+        myclassButton.className = user.enabledForMyclass ? 'ml-2 p-1 bg-green-500 text-white cursor-pointer hover:bg-green-400 rounded' : 'ml-2 p-1 bg-gray-800 text-white cursor-pointer hover:bg-green-400 rounded';
+        myclassButton.addEventListener('click', function() {
+            // Toggle the 'enabledForMyclass' property and update the user list in local storage
+            user.enabledForMyclass = !user.enabledForMyclass;
+            myclassButton.textContent = user.enabledForMyclass ? 'M' : 'M';
+            myclassButton.className = user.enabledForMyclass ? 'ml-2 p-1 bg-green-500 text-white cursor-pointer hover:bg-green-400 rounded' : 'ml-2 p-1 bg-gray-800 text-white cursor-pointer hover:bg-green-400 rounded';
+            chrome.storage.local.set({users: users}, function() {
+                if (chrome.runtime.lastError) {
+                    console.log(`Error updating user in local storage: ${chrome.runtime.lastError.message}`);
+                } else {
+                    console.log("User updated in local storage");
+                    updateListItems(users); // Update the list to reflect the changes
+                }
+            });
+        });
+
+        // Create the Internet button
+        let internetButton = document.createElement('button');
+        internetButton.innerHTML = `<div class="tooltip">
+            <img src="icons/wifi.svg" width="20px" height="20px"></img>
+            <span class="tooltiptext">Internet Login</span>
+            </div>`;
+        internetButton.className = user.enabledForInternet ? 'ml-2 p-1 bg-green-500 text-white cursor-pointer hover:bg-green-400 rounded' : 'ml-2 p-1 bg-gray-800 text-white cursor-pointer hover:bg-green-400 rounded';
+        internetButton.addEventListener('click', function() {
+            // Toggle the 'enabledForInternet' property and update the user list in local storage
+            user.enabledForInternet = !user.enabledForInternet;
+            internetButton.textContent = user.enabledForInternet ? 'I' : 'I';
+            internetButton.className = user.enabledForInternet ? 'ml-2 p-1 bg-green-500 text-white cursor-pointer hover:bg-green-400 rounded' : 'ml-2 p-1 bg-gray-800 text-white cursor-pointer hover:bg-green-400 rounded';
+            chrome.storage.local.set({users: users}, function() {
+                if (chrome.runtime.lastError) {
+                    console.log(`Error updating user in local storage: ${chrome.runtime.lastError.message}`);
+                } else {
+                    console.log("User updated in local storage");
+                    updateListItems(users); // Update the list to reflect the changes
+                }
+            });
+        });
+
+        li.appendChild(internetButton);
+        li.appendChild(umsButton);
+        li.appendChild(myclassButton);
         li.appendChild(deleteButton);
         userList.appendChild(li);
     });
 }
 
-chrome.storage.local.get(['users', 'activeUser'], function(result) {
+chrome.storage.local.get(['users'], function(result) {
     if (chrome.runtime.lastError) {
         console.log(`Error retrieving data from local storage: ${chrome.runtime.lastError.message}`);
     } else {
         let users = result.users || [];
-        let activeUser = result.activeUser || {};
-        updateListItems(users, activeUser);
+        updateListItems(users);
     }
 });
 

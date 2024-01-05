@@ -55,12 +55,45 @@
         li{
             border-radius: 10px;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #111827;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 3;
+            bottom: 100%; /* Position the tooltip above the text */
+            left: 50%;
+            margin-left: -60px; /* Use half of the width to center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .ionion{
+            color: white;
+            fill: white;
         }
     </style>
 </head>
 <body class=" p-3  w-80 bg-black text-white m-3 mt-1 pt-1">
     <div class="flex p-2 justify-center items-center pb-3" >
-        <img src="logo.png" alt="" width="50px" height="50px" id="logo">
+        <img src="img/logo.png" alt="" width="50px" height="50px" id="logo">
         <h1 class="text-3xl" id="mainHeading">QUICKLOGIN</h1>
     </div>
     <div style="width: 100%;">
@@ -97,10 +130,9 @@
         </label>
         <span class="p-1 text-gray-400">myclass.lpu.in</span>
     </div>
-    
     <div class="flex items-center mt-4">
-        
     </div>
+    
     <div class="flex justify-center items-end pt-3" >
         <a href="https://dewansnehra.xyz" target="_blank" >Dewans Nehra</a>
     </div>
