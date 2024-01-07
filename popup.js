@@ -55,7 +55,14 @@ document.getElementById('save').addEventListener('click', () => {
             let users = result.users || [];
             let userIdCounter = result.userIdCounter || 0;
 
-            let newUser = {userId: userIdCounter, username: username, password: password};
+            let newUser = {
+                userId: userIdCounter, 
+                username: username, 
+                password: password,
+                enabledForInternet: true,
+                enabledForUms: true,
+                enabledForMyclass: true
+            };
             users.push(newUser); // Add the new user to the users array
 
             // Increment the userId counter
